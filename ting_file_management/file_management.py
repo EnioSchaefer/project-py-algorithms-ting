@@ -10,6 +10,3 @@ def txt_importer(path_file):
                 return file.read().splitlines()
     except FileNotFoundError:
         print(f"Arquivo {path_file} não encontrado", file=sys.stderr)
-
-
-print(txt_importer('statics/arquivo_teste.txt'))
