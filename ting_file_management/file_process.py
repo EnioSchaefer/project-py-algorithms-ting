@@ -1,4 +1,13 @@
 from ting_file_management.file_management import txt_importer
+import sys
+
+
+def format_dict(path_file, file_length, file_lines):
+    return {
+        "nome_do_arquivo": path_file,
+        "qtd_linhas": file_length,
+        "linhas_do_arquivo": file_lines
+    }
 
 
 def process(path_file, instance):
@@ -8,13 +17,9 @@ def process(path_file, instance):
     if path_file not in instance.search(None):
         instance.enqueue(path_file)
 
-    formatted_dict = {
-        "nome_do_arquivo": path_file,
-        "qtd_linhas": len(file_lines),
-        "linhas_do_arquivo": file_lines
-    }
+    file_data = format_dict(path_file, len(file_lines), file_lines)
 
-    return print(formatted_dict)
+    return print(file_data)
 
 
 def remove(instance):
@@ -27,4 +32,12 @@ def remove(instance):
 
 
 def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
+    try:
+        path_file = instance.search(position)
+        file_lines = txt_importer(path_file)
+
+        file_data = format_dict(path_file, len(file_lines), file_lines)
+
+        return print(file_data)
+    except IndexError:
+        return print("Posição inválida", file=sys.stderr)

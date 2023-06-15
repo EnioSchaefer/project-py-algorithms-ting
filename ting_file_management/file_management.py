@@ -9,4 +9,4 @@ def txt_importer(path_file):
             else:
                 return file.read().splitlines()
     except FileNotFoundError:
-        print(f"Arquivo {path_file} não encontrado", file=sys.stderr)
+        return print(f"Arquivo {path_file} não encontrado", file=sys.stderr)
